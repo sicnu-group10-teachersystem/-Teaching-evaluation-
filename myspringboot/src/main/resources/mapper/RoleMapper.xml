@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="sicnu.cjj.myspringboot.mapper.RoleMapper">
+
+    <!--通过用户id查询到用户所属角色id-->
+    <select id="selectrolebyuser" parameterType="int" resultType="int">
+        select role_id from user_role where user_id=#{user_id}
+    </select>
+    <!--通过角色id查询到角色名-->
+    <select id="selectnamebyroleid" parameterType="int" resultType="String">
+        select role_name from role where role_id=#{role_id}
+    </select>
+</mapper>

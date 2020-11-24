@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="sicnu.cjj.myspringboot.mapper.AuthorityMapper">
+
+    <!--通过角色查询到角色所拥有权限id-->
+    <select id="selectauthidbyrole" parameterType="int" resultType="int">
+        select authority_id from role_authority where role_id=#{role_id}
+    </select>
+
+    <!--通过权限id得到权限名-->
+    <select id="selectauthbyid" parameterType="int" resultType="sicnu.cjj.myspringboot.entity.Authority">
+        select * from authority where authority_id=#{authority_id}
+    </select>
+</mapper>

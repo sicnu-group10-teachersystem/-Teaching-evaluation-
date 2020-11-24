@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="sicnu.cjj.myspringboot.mapper.TeacherMapper">
+
+    <!--通过教师id查询教师档案-->
+    <select id="getteacherfile" parameterType="Integer" resultType="sicnu.cjj.myspringboot.entity.TeacherFile">
+        select * from teacher_file where teacher_id=#{teacher_id}
+    </select>
+</mapper>
