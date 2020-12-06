@@ -6,4 +6,63 @@
     <select id="getteacherfile" parameterType="Integer" resultType="sicnu.cjj.myspringboot.entity.TeacherFile">
         select * from teacher_file where teacher_id=#{teacher_id}
     </select>
+
+    <!--将教师输入的临时档案信息发送给教师档案临时数据库-->
+    <insert id="sendteacherfile" parameterType="java.util.LinkedHashMap" >
+        insert into tempteacher_file
+        values
+        <foreach collection="params" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </insert>
+
+    <!--通过教师id查询到教师授课列表-->
+    <select id="getteacherclasslist" parameterType="Integer" resultType="sicnu.cjj.myspringboot.entity.TeacherClass">
+        select class_num,course_name,class_course.class_id as class_id,course_id
+        from class_course,class as c
+        where class_course.class_id=c.class_id
+        and teacher_id=#{teacher_id}
+    </select>
+
+    <!--通过教师id查所有除本人之外的教师，课程id，班级id-->
+    <select id="getotherteacherlist" parameterType="Integer" resultType="sicnu.cjj.myspringboot.entity.TeacherClass">
+        select class_id,course_name,course_id,teacher_id from class_course where teacher_id != #{teacher_id};
+    </select>
+
+    <!---通过之前的教师id，课程id，班级id查询到教师名，课程名，班级名-->
+    <select id="otherteacherlistname" parameterType="sicnu.cjj.myspringboot.entity.TeacherClass" resultType="sicnu.cjj.myspringboot.entity.TeacherClass">
+        select course_name from course
+    </select>
+
+    <!--通过教师id查询教师姓名-->
+    <select id="getteachername" parameterType="Integer" resultType="String">
+        select name from users where user_id=#{teacher_id}
+    </select>
+
+    <!--通过教师id，班级id等信息查询到所有班级学生对教师的教学建议
+    -limit ${(params.pageNum - 1) * params.pageSize},#{params.pageSize};
+    -->
+    <select id="getstudentsuggges"  parameterType="java.util.LinkedHashMap" resultType="String">
+        select answer from student_evaluation
+        where teacher_id=#{params.teacher_id} and course_id=#{params.course_id}
+        and user_id in (select student_id from student where class_id=#{params.class_id})
+        and ques_id=13
+
+    </select>
+
+    <!--通过班级id，课程id，查询到授课时间，地点，课程类型，课程名信息-->
+    <select id="getclasscoursemsg" parameterType="Integer" resultType="java.util.Map">
+        select course_time,course_place,course_type,course_name
+        from class_course
+        where class_id=#{class_id} and course_id=#{course_id}
+    </select>
+
+    <!--将教师填写的大表数据添加到数据库中-->
+    <insert id="addteachertable" parameterType="java.util.LinkedHashMap" >
+        insert into teaching_quality_evaluation values
+        <foreach collection="params" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </insert>
+
 </mapper>

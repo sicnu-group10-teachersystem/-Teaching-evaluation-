@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="sicnu.cjj.myspringboot.mapper.TableMapper">
+
+    <!--查看动态子项目-->
+    <select id="getteachertablemsg" resultType="sicnu.cjj.myspringboot.entity.TableMsg">
+        select ques_project,ques_desc from ques_table where mytable_id=1;
+    </select>
+
+</mapper>

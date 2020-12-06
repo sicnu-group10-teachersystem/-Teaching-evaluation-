@@ -6,4 +6,5 @@ import lombok.Data;
 public class Role {
     private int role_id;
     private String role_name;
+    private String role_desc;
 }

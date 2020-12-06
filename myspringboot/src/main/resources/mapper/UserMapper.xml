@@ -6,4 +6,9 @@
     <select id="findUser" parameterType="String" resultType="sicnu.cjj.myspringboot.entity.User">
         select * from users where account=#{account}
     </select>
+
+    <!--通过用户id查询到用户名-->
+    <select id="getusername" parameterType="Integer" resultType="String">
+        select name from users where user_id=#{user_id}
+    </select>
 </mapper>

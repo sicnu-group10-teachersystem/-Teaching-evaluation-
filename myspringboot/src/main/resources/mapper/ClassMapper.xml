@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="sicnu.cjj.myspringboot.mapper.ClassMapper">
+
+    <!--通过班级id查询到班级号-->
+    <select id="getclassnum" parameterType="int" resultType="String">
+        select class_num from class where class_id=#{class_id}
+    </select>
+
+
+    <!--通过班级id插叙到班级其他信息-->
+    <select id="getclassmsg" parameterType="Integer" resultType="java.util.Map">
+        select college,major,grade,class_number from class where class_id=#{class_id}
+    </select>
+
+</mapper>

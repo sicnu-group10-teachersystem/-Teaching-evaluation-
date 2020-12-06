@@ -8,6 +8,7 @@ public class Authority {
     private String authority_name;
     private String authority_url;
     private String parent;
+    private String zh_name;
 
     public int getAuthority_id() {
         return authority_id;
@@ -40,4 +41,12 @@ public class Authority {
     public void setParent(String parent) {
         this.parent = parent;
     }
+    public String getZh_name() {
+        return zh_name;
+    }
+
+    public void setZh_name(String zh_name) {
+        this.zh_name = zh_name;
+    }
+
 }

@@ -9,6 +9,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +26,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("user")
 public class UserController {
 
@@ -33,9 +35,10 @@ public class UserController {
     @Resource
     LoginServiceImpl loginServiceImpl;
     @RequestMapping("login")
-    public Result getUser(@RequestBody LinkedHashMap<String,String> params , Model model){
+    public Result getUser(@RequestBody LinkedHashMap<String,String> params ){
         //String account, String password, Model model
         //获取当前用户
+
         Subject subject = SecurityUtils.getSubject();
         //封装用户的登录数据
         UsernamePasswordToken token = new UsernamePasswordToken(params.get("account") ,params.get("password"));
@@ -50,11 +53,11 @@ public class UserController {
             Result result=ResultGenerator.genSuccessResult(loginInfo);
             return result;
         }catch(UnknownAccountException e){
-            model.addAttribute("msg","用户名错误");
+            //model.addAttribute("msg","用户名错误");
             String message = String.format("登陆失败，详细信息[用户名、密码信息不正确]。");
             return ResultGenerator.genFailResult(message);
         }catch(IncorrectCredentialsException e){
-            model.addAttribute("msd","cs");
+            ///model.addAttribute("msd","cs");
             String message = String.format("登陆失败，详细信息[用户名、密码信息不正确]。");
             return ResultGenerator.genFailResult(message);
         }

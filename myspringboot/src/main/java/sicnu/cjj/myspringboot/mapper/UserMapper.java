@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface UserMapper {
     User findUser(String account);
+    String getusername(Integer user_id);
 }
